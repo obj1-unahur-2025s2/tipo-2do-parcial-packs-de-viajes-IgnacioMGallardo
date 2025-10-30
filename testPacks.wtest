@@ -1,4 +1,7 @@
 import packs.*
+import coordinadores.*
+import beneficios.*
+
 describe "Primer parte: Packs básicos, coordinadores y beneficios" {
     
     const coordinador1 = new Coordinador(cantViajesRealizados=8, experiencia=5, rol=guia, estaMotivado=true)
@@ -32,7 +35,6 @@ describe "Primer parte: Packs básicos, coordinadores y beneficios" {
 
 describe "Segunda parte: Coordinadores altamente calificados" {
   
-
   test "Un guía motivado con 21 viajes realizados es considerado altamente calificado." {
     const coordinador1 = new Coordinador(cantViajesRealizados=21, experiencia=5, rol=guia, estaMotivado=true)
     assert.that(coordinador1.estaAltamenteCalificado())
@@ -44,5 +46,12 @@ describe "Segunda parte: Coordinadores altamente calificados" {
   test "Un acompañante con cualquier cantidad de viajes es siempre calificado si supera los 20." {
     const coordinador1 = new Coordinador(cantViajesRealizados=21, experiencia=5, rol=acompaniante, estaMotivado=true)
     assert.that(coordinador1.estaAltamenteCalificado())
+  }
+}
+
+describe "Tercera parte: Packs Premium" {
+
+  test "Un pack con 12 dias de duración y con un coordinador guía" {
+    
   }
 }
