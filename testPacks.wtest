@@ -2,20 +2,30 @@ import packs.*
 describe "Primer parte: Packs básicos, coordinadores y beneficios" {
     
     const coordinador1 = new Coordinador(experiencia=5, rol="guia")
+    const beneficio1 = new BeneficiosEspeciales(tipo="Traslado Privado",costo=80500, estaVigente=true)
+    const beneficio2 = new BeneficiosEspeciales(tipo="Seguro Adicional",costo=90000, estaVigente=true)
+    const beneficio3 = new BeneficiosEspeciales(tipo="Seguro Adicional",costo=90000, estaVigente=false)
+
 
   test "Un pack nacional sin beneficios vigentes devuelve el mismo precio base." {
     const packNac1 = new PackNacional(duracion=2, precioBase=200000, coordinador=coordinador1, provinciaDestino="Córdoba")
     assert.equals(200000, packNac1.precioTotal())
   }
   test "Un pack nacional con 2 beneficios vigentes suma correctamente sus costos al precio base." {
-    const beneficio1 = new BeneficiosEspeciales(tipo="Traslado Privado",costo=80500, estaVigente=true)
-    const beneficio2 = new BeneficiosEspeciales(tipo="Acceso a Salas VIP",costo=120000, estaVigente=true)
     const packNac1 = new PackNacional(duracion=2, precioBase=200000, coordinador=coordinador1, provinciaDestino="Córdoba")
     packNac1.agregarBeneficio(beneficio1)
     packNac1.agregarBeneficio(beneficio2)
-    assert.equals(400500, packNac1.precioTotal())
+    assert.equals(370500, packNac1.precioTotal())
   }
   test "Un pack internacional sin beneficios vigentes calcula correctamente el total con el 20% de recargo." {
-    
+    const packInt1 = new PackInternacional(duracion=2, precioBase=200000, coordinador=coordinador1, paisDestino="Chile")
+    packInt1.agregarBeneficio(beneficio3)
+    assert.equals(240000, packInt1.precioTotal())
+  }
+  test "Un pack internacional con 1 beneficio vigente y otro no calcula correctamente el total con el 20% de recargo." {
+    const packInt1 = new PackInternacional(duracion=2, precioBase=200000, coordinador=coordinador1, paisDestino="Chile")
+    packInt1.agregarBeneficio(beneficio2)
+    packInt1.agregarBeneficio(beneficio3)
+    assert.equals(348000, packInt1.precioTotal())
   }
 }

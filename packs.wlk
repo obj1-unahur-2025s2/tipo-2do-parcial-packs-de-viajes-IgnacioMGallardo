@@ -7,7 +7,7 @@ class PackDeViajes{
   const property beneficiosAgregados = []
 
   method agregarBeneficio(unBeneficio) {beneficiosAgregados.add(unBeneficio)}
-  method precioTotal() = precioBase + beneficiosAgregados.sum({b=> b.costo()})
+  method precioTotal() = precioBase + beneficiosAgregados.sum({b=>b.costo()})
 }
 
 class PackNacional inherits PackDeViajes{
@@ -40,6 +40,8 @@ class Coordinador{
 //BENEFICIOS ESPECIALES
 class BeneficiosEspeciales{
   const property tipo
-  const property costo
-  const property estaVigente
+  const costo
+  const estaVigente
+
+  method costo() = if(estaVigente) costo else 0
 }
