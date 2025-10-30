@@ -15,27 +15,43 @@ class PackNacional inherits PackDeViajes{
   const property actividadesincluidas = [] //Las actividades son Strings
 
   method agregarActividad(unaActividad){actividadesincluidas.add(unaActividad)}
+  
 }
 class PackInternacional inherits PackDeViajes{
-  const property paisDestino
+  const property paisDestino //Es un string
   override method precioTotal() = super() * 1.2
+}
+class PackProvincial inherits PackNacional{
+  const property ciudadesAVisitar = []
+
+  method esPackPremium() = actividadesincluidas.count() >= 4 && ciudadesAVisitar.count() > 5 && beneficiosAgregados.count({b=> b.estaVigente()}) >= 3
 }
 
 //COORDINADORES
 class Coordinador{
-  var cantViajesRealizados = 0
-  //const estaMotivado = true
+  var cantViajesRealizados
+  var property estaMotivado 
   const property experiencia
-  var property rol //Estos son en String ("Guía", "Asistente Logístico" o "Acompañante")
+  var property rol 
   
   method realizarViaje() {cantViajesRealizados += 1}
-  
   method cambiarRol(unRol) {
-    if(unRol == "Guía" || unRol == "Asistente Logístico" || unRol == "Acompañante")
+    if(unRol == guia || unRol == asistenteLogistico || unRol == acompaniante)
       rol = unRol
     else
       throw new Exception(message="No es un rol válido")
   }
+  method estaAltamenteCalificado() = cantViajesRealizados > 20 && rol.estaCalificado(self)
+}
+object guia{
+  method estaCalificado(unCoordinador) = unCoordinador.estaMotivado()
+}
+object asistenteLogistico {
+  method estaCalificado(unCoordinador) = unCoordinador.experiencia() >= 3
+}
+object acompaniante {
+  
+  method estaCalificado(unCoordinador) = true
 }
 //BENEFICIOS ESPECIALES
 class BeneficiosEspeciales{

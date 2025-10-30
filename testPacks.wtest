@@ -1,7 +1,7 @@
 import packs.*
 describe "Primer parte: Packs básicos, coordinadores y beneficios" {
     
-    const coordinador1 = new Coordinador(experiencia=5, rol="guia")
+    const coordinador1 = new Coordinador(cantViajesRealizados=8, experiencia=5, rol=guia, estaMotivado=true)
     const beneficio1 = new BeneficiosEspeciales(tipo="Traslado Privado",costo=80500, estaVigente=true)
     const beneficio2 = new BeneficiosEspeciales(tipo="Seguro Adicional",costo=90000, estaVigente=true)
     const beneficio3 = new BeneficiosEspeciales(tipo="Seguro Adicional",costo=90000, estaVigente=false)
@@ -27,5 +27,22 @@ describe "Primer parte: Packs básicos, coordinadores y beneficios" {
     packInt1.agregarBeneficio(beneficio2)
     packInt1.agregarBeneficio(beneficio3)
     assert.equals(348000, packInt1.precioTotal())
+  }
+}
+
+describe "Segunda parte: Coordinadores altamente calificados" {
+  
+
+  test "Un guía motivado con 21 viajes realizados es considerado altamente calificado." {
+    const coordinador1 = new Coordinador(cantViajesRealizados=21, experiencia=5, rol=guia, estaMotivado=true)
+    assert.that(coordinador1.estaAltamenteCalificado())
+  }
+  test "Un asistente logístico con menos de 3 años de experiencia no es calificado, aunque tenga muchos viajes." {
+    const coordinador1 = new Coordinador(cantViajesRealizados=30, experiencia=2, rol=asistenteLogistico, estaMotivado=true)
+    assert.notThat(coordinador1.estaAltamenteCalificado())
+  }
+  test "Un acompañante con cualquier cantidad de viajes es siempre calificado si supera los 20." {
+    const coordinador1 = new Coordinador(cantViajesRealizados=21, experiencia=5, rol=acompaniante, estaMotivado=true)
+    assert.that(coordinador1.estaAltamenteCalificado())
   }
 }
