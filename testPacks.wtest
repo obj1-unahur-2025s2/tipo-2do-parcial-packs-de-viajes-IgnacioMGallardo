@@ -21,12 +21,26 @@ describe "Primer parte: Packs básicos, coordinadores y beneficios" {
     assert.equals(370500, packNac1.precioTotal())
   }
   test "Un pack internacional sin beneficios vigentes calcula correctamente el total con el 20% de recargo." {
-    const packInt1 = new PackInternacional(duracion=2, precioBase=200000, coordinador=coordinador1, paisDestino="Chile")
+    const packInt1 = new PackInternacional(
+                                  duracion=2, 
+                                  precioBase=200000, 
+                                  coordinador=coordinador1, 
+                                  paisDestino="Chile",
+                                  esLugarDeInteres=false,
+                                  tieneEscalas=false
+                                  )
     packInt1.agregarBeneficio(beneficio3)
     assert.equals(240000, packInt1.precioTotal())
   }
   test "Un pack internacional con 1 beneficio vigente y otro no calcula correctamente el total con el 20% de recargo." {
-    const packInt1 = new PackInternacional(duracion=2, precioBase=200000, coordinador=coordinador1, paisDestino="Chile")
+    const packInt1 = new PackInternacional(
+                                  duracion=2, 
+                                  precioBase=200000, 
+                                  coordinador=coordinador1, 
+                                  paisDestino="Chile",
+                                  esLugarDeInteres=false,
+                                  tieneEscalas=false
+                                  )
     packInt1.agregarBeneficio(beneficio2)
     packInt1.agregarBeneficio(beneficio3)
     assert.equals(348000, packInt1.precioTotal())
@@ -48,8 +62,6 @@ describe "Segunda parte: Coordinadores altamente calificados" {
     assert.that(coordinador1.estaAltamenteCalificado())
   }
   /* 
-  // NO ENTENDÍ CÓMO FUNCIONA LO DE TESTEAR AL ERROR. NO SÉ CÓMO SE ESCRIBE PARA QUE EL TEST PASE \\
-
   test "Probar que si se selecciona un rol que no está disponible, tira un mensaje de excepción." {
     const coordinador1 = new Coordinador(cantViajesRealizados=21, experiencia=5, rol=guia, estaMotivado=true)
     coordinador1.cambiarRol("unRolCualquiera")
@@ -58,9 +70,3 @@ describe "Segunda parte: Coordinadores altamente calificados" {
   */
 }
 
-describe "Tercera parte: Packs Premium" {
-
-  test "Un pack con 12 dias de duración y con un coordinador guía" {
-    
-  }
-}

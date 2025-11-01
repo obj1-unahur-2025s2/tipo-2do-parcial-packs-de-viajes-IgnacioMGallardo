@@ -2,7 +2,7 @@ class PackDeViajes{
   //Asumo que la duración, el precio base y el coordinador del pack no va a cambiar, por eso los pongo como constantes
   const property duracion
   const property precioBase
-  var coordinador
+  const coordinador
   const property beneficiosAgregados = []
 
   method agregarBeneficio(unBeneficio) {beneficiosAgregados.add(unBeneficio)}
@@ -21,7 +21,7 @@ class PackNacional inherits PackDeViajes{
 class PackInternacional inherits PackDeViajes{
   const property paisDestino //Es un string
   const property esLugarDeInteres
-  var tieneEscalas
+  const tieneEscalas
 
   override method precioTotal() = super() * 1.2
   override method esPremium() = paisDestino.esLugarDeInteres() && duracion > 20 && !tieneEscalas
@@ -29,6 +29,6 @@ class PackInternacional inherits PackDeViajes{
 class PackProvincial inherits PackNacional{
   const property ciudadesAVisitar = []
 
-  method esPackPremium() = actividadesincluidas.count() >= 4 && ciudadesAVisitar.count() > 5 && beneficiosAgregados.count({b=> b.estaVigente()}) >= 3
-  override method precioTotal() = super() * 1.05
+  override method esPremium() = actividadesincluidas.count() >= 4 && ciudadesAVisitar.count() > 5 && beneficiosAgregados.count({b=> b.estaVigente()}) >= 3
+  override method precioTotal() = if(self.esPremium()) super() * 1.05 else super()
 }
