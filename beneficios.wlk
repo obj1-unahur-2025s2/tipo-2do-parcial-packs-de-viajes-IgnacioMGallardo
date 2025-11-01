@@ -4,7 +4,16 @@ import coordinadores.*
 class BeneficiosEspeciales{
   const property tipo
   const costo
-  const estaVigente
+  var estaVigente
 
   method costo() = if(estaVigente) costo else 0
+}
+object trasladoPrivado {
+  
+}
+object accesoVIP {
+  
+}
+object segurosAdicionales {
+  
 }

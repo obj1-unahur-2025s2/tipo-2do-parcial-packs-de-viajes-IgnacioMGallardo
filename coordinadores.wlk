@@ -2,17 +2,19 @@ import packs.*
 import beneficios.*
 
 class Coordinador{
-  var cantViajesRealizados
-  var property estaMotivado 
+  const cantViajesRealizados
+  const property estaMotivado 
   const property experiencia
-  var property rol 
+  var rol
+  const rolesValidos = #{guia, asistenteLogistico, acompaniante}
   
-  method realizarViaje() {cantViajesRealizados += 1}
+  
+  method experiencia() = experiencia
   method cambiarRol(unRol) {
-    if(unRol == guia || unRol == asistenteLogistico || unRol == acompaniante)
+    if(rolesValidos.contains(unRol))
       rol = unRol
     else
-      throw new Exception(message="No es un rol válido")
+      throw new Exception(message="El rol seleccionado no es un rol vigente por el momento")
   }
   method estaAltamenteCalificado() = cantViajesRealizados > 20 && rol.estaCalificado(self)
 }

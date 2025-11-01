@@ -47,6 +47,15 @@ describe "Segunda parte: Coordinadores altamente calificados" {
     const coordinador1 = new Coordinador(cantViajesRealizados=21, experiencia=5, rol=acompaniante, estaMotivado=true)
     assert.that(coordinador1.estaAltamenteCalificado())
   }
+  /* 
+  // NO ENTENDÍ CÓMO FUNCIONA LO DE TESTEAR AL ERROR. NO SÉ CÓMO SE ESCRIBE PARA QUE EL TEST PASE \\
+
+  test "Probar que si se selecciona un rol que no está disponible, tira un mensaje de excepción." {
+    const coordinador1 = new Coordinador(cantViajesRealizados=21, experiencia=5, rol=guia, estaMotivado=true)
+    coordinador1.cambiarRol("unRolCualquiera")
+    assert.throwsExceptionWithMessage("El rol seleccionado no es un rol vigente por el momento", {coordinador1.rol() == "unRolCualquiera"})
+  }
+  */
 }
 
 describe "Tercera parte: Packs Premium" {
